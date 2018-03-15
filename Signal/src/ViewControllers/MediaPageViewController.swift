@@ -6,7 +6,7 @@ import UIKit
 
 class MediaPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, MediaDetailViewControllerDelegate {
 
-    private struct MediaGalleryItem: Equatable {
+    private struct MediaDetailItem: Equatable {
         let message: TSMessage
         let attachmentStream: TSAttachmentStream
         let viewController: MediaDetailViewController
@@ -25,9 +25,9 @@ class MediaPageViewController: UIPageViewController, UIPageViewControllerDataSou
         }
     }
 
-    private var cachedItems: [MediaGalleryItem] = []
-    private var initialItem: MediaGalleryItem!
-    private var currentItem: MediaGalleryItem! {
+    private var cachedItems: [MediaDetailItem] = []
+    private var initialItem: MediaDetailItem!
+    private var currentItem: MediaDetailItem! {
         return cachedItems.first { $0.viewController == viewControllers?.first }
     }
 
@@ -98,6 +98,10 @@ class MediaPageViewController: UIPageViewController, UIPageViewControllerDataSou
         // Navigation
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(didPressDismissButton))
+
+        if includeGallery {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: MediaStrings.allMedia, style: .plain, target: self, action: #selector(didPressAllMediaButton))
+        }
 
         // Even though bars are opaque, we want content to be layed out behind them.
         // The bars might obscure part of the content, but they can easily be hidden by tapping
@@ -170,6 +174,15 @@ class MediaPageViewController: UIPageViewController, UIPageViewControllerDataSou
     }
 
     // MARK: View Helpers
+
+    @objc
+    public func didPressAllMediaButton(sender: Any) {
+        Logger.debug("\(logTag) in \(#function)")
+
+        // TODO fancy animation - zoom media item into it's tile in the all media grid
+        let allMediaController = AllMediaViewController(mediaMessages: self.mediaMessages, uiDatabaseConnection: self.uiDatabaseConnection)
+        self.navigationController?.pushViewController(allMediaController, animated: true)
+    }
 
     @objc
     public func didSwipeView(sender: Any) {
@@ -524,7 +537,7 @@ class MediaPageViewController: UIPageViewController, UIPageViewControllerDataSou
         return nextItem.viewController
     }
 
-    private func buildGalleryItem(mediaMessage: TSMessage, thread: TSThread) -> MediaGalleryItem? {
+    private func buildGalleryItem(mediaMessage: TSMessage, thread: TSThread) -> MediaDetailItem? {
         var fetchedAttachment: TSAttachment? = nil
         var fetchedItem: ConversationViewItem? = nil
         self.uiDatabaseConnection.read { transaction in
@@ -544,7 +557,7 @@ class MediaPageViewController: UIPageViewController, UIPageViewControllerDataSou
 
         let viewController = MediaDetailViewController(attachmentStream: attachmentStream, viewItem: viewItem)
         viewController.delegate = self
-        return MediaGalleryItem(message: mediaMessage,
+        return MediaDetailItem(message: mediaMessage,
                                 attachmentStream: attachmentStream,
                                 viewController: viewController)
     }
@@ -697,7 +710,7 @@ class MediaPageViewController: UIPageViewController, UIPageViewControllerDataSou
     }
 }
 
-fileprivate extension Collection {
+public extension Collection {
 
     /// Returns the element at the specified index iff it is within bounds, otherwise nil.
     subscript (safe index: Index) -> Element? {
