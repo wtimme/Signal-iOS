@@ -1,6 +1,9 @@
 platform :ios, '9.0'
 source 'https://github.com/CocoaPods/Specs.git'
 
+# By default, ignore all warnings from installed Pods.
+inhibit_all_warnings!
+
 use_frameworks!
 
 def shared_pods
@@ -10,7 +13,7 @@ def shared_pods
   # pod 'YapDatabase/SQLCipher', path: '../YapDatabase'
   pod 'YapDatabase/SQLCipher', :git => 'https://github.com/signalapp/YapDatabase.git', branch: 'release/unencryptedHeaders'
   # pod 'AxolotlKit',   path: '../SignalProtocolKit'
-  pod 'SignalServiceKit', path: '.'
+  pod 'SignalServiceKit', path: '.', :inhibit_warnings => false
   pod 'AxolotlKit', git: 'https://github.com/signalapp/SignalProtocolKit.git'
   #pod 'AxolotlKit', path: '../SignalProtocolKit'
   pod 'HKDFKit', git: 'https://github.com/signalapp/HKDFKit.git', branch: 'mkirk/framework-friendly'
@@ -21,22 +24,22 @@ def shared_pods
   #pod 'GRKOpenSSLFramework', path: '../GRKOpenSSLFramework'
 
   # third party pods
-  pod 'AFNetworking', inhibit_warnings: true
-  pod 'JSQMessagesViewController',  git: 'https://github.com/signalapp/JSQMessagesViewController.git', branch: 'mkirk/share-compatible', :inhibit_warnings => true
-  #pod 'JSQMessagesViewController',  git: 'https://github.com/signalapp/JSQMessagesViewController.git', branch: 'signal-master', :inhibit_warnings => true
+  pod 'AFNetworking'
+  pod 'JSQMessagesViewController',  git: 'https://github.com/signalapp/JSQMessagesViewController.git', branch: 'mkirk/share-compatible'
+  #pod 'JSQMessagesViewController',  git: 'https://github.com/signalapp/JSQMessagesViewController.git', branch: 'signal-master'
   #pod 'JSQMessagesViewController',   path: '../JSQMessagesViewController'
-  pod 'Mantle', :inhibit_warnings => true
+  pod 'Mantle'
   # pod 'YapDatabase/SQLCipher', :inhibit_warnings => true
-  pod 'PureLayout', :inhibit_warnings => true
-  pod 'Reachability', :inhibit_warnings => true
-  pod 'SocketRocket', :git => 'https://github.com/facebook/SocketRocket.git', :inhibit_warnings => true
+  pod 'PureLayout'
+  pod 'Reachability'
+  pod 'SocketRocket', :git => 'https://github.com/facebook/SocketRocket.git'
   pod 'YYImage'
 end
 
 target 'Signal' do
   shared_pods
-  pod 'ATAppUpdater', :inhibit_warnings => true
-  pod 'SSZipArchive', :inhibit_warnings => true
+  pod 'ATAppUpdater'
+  pod 'SSZipArchive'
 
   target 'SignalTests' do
     inherit! :search_paths
