@@ -29,7 +29,6 @@ def shared_pods
   #pod 'JSQMessagesViewController',  git: 'https://github.com/signalapp/JSQMessagesViewController.git', branch: 'signal-master'
   #pod 'JSQMessagesViewController',   path: '../JSQMessagesViewController'
   pod 'Mantle'
-  # pod 'YapDatabase/SQLCipher', :inhibit_warnings => true
   pod 'PureLayout'
   pod 'Reachability'
   pod 'SocketRocket', :git => 'https://github.com/facebook/SocketRocket.git'
