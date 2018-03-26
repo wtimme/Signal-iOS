@@ -26,7 +26,6 @@ def shared_pods
   # third party pods
   pod 'AFNetworking'
   pod 'JSQMessagesViewController',  git: 'https://github.com/signalapp/JSQMessagesViewController.git', branch: 'mkirk/share-compatible'
-  #pod 'JSQMessagesViewController',  git: 'https://github.com/signalapp/JSQMessagesViewController.git', branch: 'signal-master'
   #pod 'JSQMessagesViewController',   path: '../JSQMessagesViewController', :inhibit_warnings => false
   pod 'Mantle'
   pod 'PureLayout'
