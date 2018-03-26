@@ -8,26 +8,26 @@ use_frameworks!
 
 def shared_pods
   # OWS Pods
-  # pod 'SQLCipher', path: '../sqlcipher2'
+  # pod 'SQLCipher', path: '../sqlcipher2', :inhibit_warnings => false
   pod 'SQLCipher', :git => 'https://github.com/sqlcipher/sqlcipher.git', :commit => 'd5c2bec'
-  # pod 'YapDatabase/SQLCipher', path: '../YapDatabase'
+  # pod 'YapDatabase/SQLCipher', path: '../YapDatabase', :inhibit_warnings => false
   pod 'YapDatabase/SQLCipher', :git => 'https://github.com/signalapp/YapDatabase.git', branch: 'release/unencryptedHeaders'
-  # pod 'AxolotlKit',   path: '../SignalProtocolKit'
+  # pod 'AxolotlKit',   path: '../SignalProtocolKit', :inhibit_warnings => false
   pod 'SignalServiceKit', path: '.', :inhibit_warnings => false
   pod 'AxolotlKit', git: 'https://github.com/signalapp/SignalProtocolKit.git'
-  #pod 'AxolotlKit', path: '../SignalProtocolKit'
+  #pod 'AxolotlKit', path: '../SignalProtocolKit', :inhibit_warnings => false
   pod 'HKDFKit', git: 'https://github.com/signalapp/HKDFKit.git', branch: 'mkirk/framework-friendly'
-  #pod 'HKDFKit', path: '../HKDFKit'
+  #pod 'HKDFKit', path: '../HKDFKit', :inhibit_warnings => false
   pod 'Curve25519Kit', git: 'https://github.com/signalapp/Curve25519Kit', branch: 'mkirk/framework-friendly'
-  #pod 'Curve25519Kit', path: '../Curve25519Kit'
+  #pod 'Curve25519Kit', path: '../Curve25519Kit', :inhibit_warnings => false
   pod 'GRKOpenSSLFramework', git: 'https://github.com/signalapp/GRKOpenSSLFramework'
-  #pod 'GRKOpenSSLFramework', path: '../GRKOpenSSLFramework'
+  #pod 'GRKOpenSSLFramework', path: '../GRKOpenSSLFramework', :inhibit_warnings => false
 
   # third party pods
   pod 'AFNetworking'
   pod 'JSQMessagesViewController',  git: 'https://github.com/signalapp/JSQMessagesViewController.git', branch: 'mkirk/share-compatible'
   #pod 'JSQMessagesViewController',  git: 'https://github.com/signalapp/JSQMessagesViewController.git', branch: 'signal-master'
-  #pod 'JSQMessagesViewController',   path: '../JSQMessagesViewController'
+  #pod 'JSQMessagesViewController',   path: '../JSQMessagesViewController', :inhibit_warnings => false
   pod 'Mantle'
   pod 'PureLayout'
   pod 'Reachability'
